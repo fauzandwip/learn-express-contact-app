@@ -1,17 +1,12 @@
 import express from 'express'
 import expressLayouts from 'express-ejs-layouts'
-import morgan from 'morgan'
+import { detailContact, loadContact } from './utils/contacts.js'
 
 const app = express()
 const PORT = 3000
 app.set('view engine', 'ejs')
 app.use(expressLayouts)
-
-// built-in middleware
 app.use(express.static('public'))
-
-// third party middleware
-app.use(morgan('dev'))
 
 app.get('/', (req, res) => {
 	const mahasiswa = [
@@ -44,9 +39,22 @@ app.get('/about', (req, res) => {
 })
 
 app.get('/contact', (req, res) => {
+	const contacts = loadContact()
+
 	res.render('contact', {
 		layout: 'layouts/main-layouts',
-		title: 'Contact Page'
+		title: 'Contact Page',
+		contacts
+	})
+})
+
+app.get('/contact/:name', (req, res) => {
+	const contact = detailContact(req.params.name)
+
+	res.render('detail', {
+		layout: 'layouts/main-layouts',
+		title: 'Detail Contact Page',
+		contact
 	})
 })
 

@@ -1,1 +1,40 @@
-<h1>Ini adalah halaman Contact</h1>
+<div class="container">
+	<div class="row">
+		<div class="col-md-8">
+			<h2>Contact List</h2>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Name</th>
+						<th scope="col">Number</th>
+						<th scope="col">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+                    <% if (contacts.length === 0) { %>
+                        <tr>
+                            <td colspan="4">
+                                <div class="alert alert-danger fw-bold" role="alert">Data is still empty!</div>
+                            </td>
+                        </tr>
+                        
+                    <% } %>
+					<% for( i in contacts ) { %>
+						<th scope="row"><%= Number(i) + 1 %></th>
+						<td><%= contacts[i]["name"] %></td>
+						<td><%= contacts[i]["email"] %></td>
+						<td>
+							<a
+								href="/contact/<%= contacts[i]["name"] %> "
+								class="btn btn-success badge rounded-pil"
+								><i class="bi bi-info-circle"></i> detail</a
+							>
+						</td>
+					</tr>
+					<% } %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
