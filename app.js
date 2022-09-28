@@ -1,10 +1,17 @@
 import express from 'express'
 import expressLayouts from 'express-ejs-layouts'
+import morgan from 'morgan'
 
 const app = express()
 const PORT = 3000
 app.set('view engine', 'ejs')
 app.use(expressLayouts)
+
+// built-in middleware
+app.use(express.static('public'))
+
+// third party middleware
+app.use(morgan('dev'))
 
 app.get('/', (req, res) => {
 	const mahasiswa = [
@@ -30,18 +37,16 @@ app.get('/', (req, res) => {
 })
 
 app.get('/about', (req, res) => {
-	res.render('about-contact', {
+	res.render('about', {
 		layout: 'layouts/main-layouts',
-		title: 'About Page',
-		page: 'About'
+		title: 'About Page'
 	})
 })
 
 app.get('/contact', (req, res) => {
-	res.render('about-contact', {
+	res.render('contact', {
 		layout: 'layouts/main-layouts',
-		title: 'Contact Page',
-		page: 'Contact'
+		title: 'Contact Page'
 	})
 })
 
