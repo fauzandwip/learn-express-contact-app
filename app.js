@@ -72,6 +72,13 @@ app.get('/contacts', (req, res) => {
 	})
 })
 
+app.get('/contacts/add', (req, res) => {
+	res.render('add-contact', {
+		layout: 'layouts/main-layouts',
+		title: 'Add Contact Form'
+	})
+})
+
 app.post(
 	'/contacts',
 	[
@@ -99,13 +106,6 @@ app.post(
 		}
 	}
 )
-
-app.get('/contacts/add', (req, res) => {
-	res.render('add-contact', {
-		layout: 'layouts/main-layouts',
-		title: 'Add Contact Form'
-	})
-})
 
 app.get('/contacts/edit/:name', (req, res) => {
 	const contact = findContact(req.params.name)

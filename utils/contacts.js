@@ -1,6 +1,5 @@
 import fs from 'fs'
 
-// const checkData = () => {
 const dirPath = './data'
 if (!fs.existsSync(dirPath)) {
 	fs.mkdirSync(dirPath)
@@ -10,7 +9,6 @@ const dataPath = './data/contacts.json'
 if (!fs.existsSync(dataPath)) {
 	fs.writeFileSync(dataPath, '[]', 'utf-8')
 }
-// }
 
 const saveContact = (data) => {
 	fs.writeFileSync('data/contacts.json', JSON.stringify(data))
