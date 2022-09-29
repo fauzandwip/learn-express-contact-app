@@ -4,6 +4,12 @@
 			<h2>Contact List</h2>
 
             <a href="/contacts/add" class="btn btn-primary mb-2">Add Contact</a>
+
+			<% if (msg.length) { %>
+			 <div class="alert alert-success" role="alert">
+				<%= msg %> 
+			 </div>
+			<% } %>
 			<table class="table">
 				<thead>
 					<tr>
@@ -28,7 +34,7 @@
 						<td><%= contacts[i]["email"] %></td>
 						<td>
 							<a
-								href="/contacts/<%= contacts[i]["name"] %> "
+								href="/contacts/<%= contacts[i]["name"] %>"
 								class="btn btn-success badge rounded-pil"
 								><i class="bi bi-info-circle"></i> detail</a
 							>

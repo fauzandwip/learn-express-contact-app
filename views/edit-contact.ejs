@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-6">
-			<h2>Form Add Contact</h2>
+			<h2>Data Contact Editing Form</h2>
 
 			<% if (typeof errors != 'undefined') { %>
 			<div class="alert alert-danger" role="alert">
@@ -12,7 +12,12 @@
 				</ul>
 			</div>
 			<% } %>
-			<form method="post" action="/contacts">
+			<form method="post" action="/contacts/update">
+				<input
+					type="hidden"
+					name="oldName"
+					value="<%= contact.oldName || contact.name %>"
+				/>
 				<div class="mb-3">
 					<label for="name" class="form-label">Name</label>
 					<input
@@ -21,6 +26,7 @@
 						id="name"
 						name="name"
 						autocomplete="off"
+						value="<%= contact.name %>"
 						required
 					/>
 				</div>
@@ -31,6 +37,7 @@
 						class="form-control"
 						id="email"
 						name="email"
+						value="<%= contact.email %>"
 						autocomplete="off"
 					/>
 				</div>
@@ -41,11 +48,12 @@
 						class="form-control"
 						id="name"
 						name="noHP"
+						value="<%= contact.noHP %>"
 						autocomplete="off"
 						required
 					/>
 				</div>
-				<button type="submit" class="btn btn-primary">Add Contact</button>
+				<button type="submit" class="btn btn-primary">Edit Contact</button>
 			</form>
 		</div>
 	</div>

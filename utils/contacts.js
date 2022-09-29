@@ -12,14 +12,19 @@ if (!fs.existsSync(dataPath)) {
 }
 // }
 
+const saveContact = (data) => {
+	fs.writeFileSync('data/contacts.json', JSON.stringify(data))
+}
+
 const loadContact = () => {
 	const file = fs.readFileSync('data/contacts.json', 'utf-8')
 	const contacts = JSON.parse(file)
 	return contacts
 }
 
-const detailContact = (name) => {
-	const contacts = loadContact()
+let contacts = loadContact()
+
+const findContact = (name) => {
 	const contact = contacts.find(
 		(contact) => contact.name.toLowerCase() === name.toLowerCase()
 	)
@@ -27,10 +32,24 @@ const detailContact = (name) => {
 }
 
 const addContact = (data) => {
-	const contacts = loadContact()
 	contacts.push(data)
-
-	fs.writeFileSync('data/contacts.json', JSON.stringify(contacts))
+	saveContact(contacts)
 }
 
-export { loadContact, detailContact, addContact }
+const editContact = (data) => {
+	let contact = findContact(data.oldName)
+	const index = contacts.indexOf(contact)
+
+	contact = data
+	delete contact.oldName
+
+	contacts[index] = contact
+	saveContact(contacts)
+}
+
+const deleteContact = (name) => {
+	const newContacts = contacts.filter((contact) => contact.name !== name)
+	saveContact(newContacts)
+}
+
+export { loadContact, findContact, addContact, deleteContact, editContact }

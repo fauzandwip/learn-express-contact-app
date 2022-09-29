@@ -15,7 +15,20 @@
 					<h5 class="card-title"><%= contact.name %></h5>
 					<h6 class="card-subtitle mb-2 text-muted"><%= contact.noHP %></h6>
 					<p class="card-text"><%= contact.email %></p>
-					<a href="/contacts" class="card-link">&laquo; Back to Contact List</a>
+					<a
+						href="/contacts/edit/<%= contact.name %>"
+						class="btn btn-info badge"
+						>Edit</a
+					>
+					<a
+						href="/contacts/delete/<%= contact.name %>"
+						class="btn btn-danger badge"
+						onclick="return confirm('Are u sure?')"
+						>Delete</a
+					>
+					<a href="/contacts" class="card-link d-block mt-3"
+						>&laquo; Back to Contact List</a
+					>
 				</div>
 			</div>
 			<% } %>
