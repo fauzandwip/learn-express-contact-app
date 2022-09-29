@@ -1,12 +1,13 @@
 import express from 'express'
 import expressLayouts from 'express-ejs-layouts'
-import { detailContact, loadContact } from './utils/contacts.js'
+import { addContact, detailContact, loadContact } from './utils/contacts.js'
 
 const app = express()
 const PORT = 3000
 app.set('view engine', 'ejs')
 app.use(expressLayouts)
 app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
 	const mahasiswa = [
@@ -38,17 +39,30 @@ app.get('/about', (req, res) => {
 	})
 })
 
-app.get('/contact', (req, res) => {
+app.get('/contacts', (req, res) => {
 	const contacts = loadContact()
 
 	res.render('contact', {
 		layout: 'layouts/main-layouts',
-		title: 'Contact Page',
+		title: 'Contacts Page',
 		contacts
 	})
 })
 
-app.get('/contact/:name', (req, res) => {
+app.post('/contacts', (req, res) => {
+	addContact(req.body)
+
+	res.redirect('/contacts')
+})
+
+app.get('/contacts/add', (req, res) => {
+	res.render('add-contact', {
+		layout: 'layouts/main-layouts',
+		title: 'Form Add Contact'
+	})
+})
+
+app.get('/contacts/:name', (req, res) => {
 	const contact = detailContact(req.params.name)
 
 	res.render('detail', {
@@ -58,4 +72,4 @@ app.get('/contact/:name', (req, res) => {
 	})
 })
 
-app.listen(PORT, console.log(`Server started at port ${PORT}`))
+app.listen(PORT, console.log(`Server started at http://localhost:${PORT}`))

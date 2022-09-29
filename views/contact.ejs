@@ -2,6 +2,8 @@
 	<div class="row">
 		<div class="col-md-8">
 			<h2>Contact List</h2>
+
+            <a href="/contacts/add" class="btn btn-primary mb-2">Add Contact</a>
 			<table class="table">
 				<thead>
 					<tr>
@@ -26,7 +28,7 @@
 						<td><%= contacts[i]["email"] %></td>
 						<td>
 							<a
-								href="/contact/<%= contacts[i]["name"] %> "
+								href="/contacts/<%= contacts[i]["name"] %> "
 								class="btn btn-success badge rounded-pil"
 								><i class="bi bi-info-circle"></i> detail</a
 							>

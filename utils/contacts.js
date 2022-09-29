@@ -26,4 +26,11 @@ const detailContact = (name) => {
 	return contact
 }
 
-export { loadContact, detailContact }
+const addContact = (data) => {
+	const contacts = loadContact()
+	contacts.push(data)
+
+	fs.writeFileSync('data/contacts.json', JSON.stringify(contacts))
+}
+
+export { loadContact, detailContact, addContact }
